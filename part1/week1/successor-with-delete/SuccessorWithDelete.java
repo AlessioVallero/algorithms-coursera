@@ -83,9 +83,10 @@ public class SuccessorWithDelete {
 
             System.out.println("Will delete " + randomDeleteCount + " elements." );
 
-            Set<Integer> deletedElements = new HashSet<Integer>();
             // For each trial, we create a new array and delete objects for deleteCount times
             for (int i = 0; i < Integer.parseInt(args[1]); i++) {
+                Set<Integer> deletedElements = new HashSet<Integer>();
+
                 SuccessorWithDelete successorWithDelete = new SuccessorWithDelete(Integer.parseInt(args[0]));
 
                 int count = 0;
