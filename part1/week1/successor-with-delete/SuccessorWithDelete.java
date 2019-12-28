@@ -43,7 +43,7 @@ public class SuccessorWithDelete {
 
             int root = weightedQuickUnionDeleted.find(i-1);
             if( i < arData.length - 1 ) {
-                if (arDataSuccessors[root] < arData[i + 1]) {
+                if (arData[arDataSuccessors[root]] < arData[i + 1]) {
                     arDataSuccessors[root] = i + 1;
                 }
             }
@@ -91,7 +91,11 @@ public class SuccessorWithDelete {
                 int count = 0;
                 do {
                     // Delete
-                    int randomElem = StdRandom.uniform(0, Integer.parseInt(args[0]));
+                    int randomElem = - 1;
+                    do {
+                        randomElem = StdRandom.uniform(0, Integer.parseInt(args[0]));
+                    }
+                    while( deletedElements.contains(randomElem) );
                     successorWithDelete.deleteElement(randomElem);
 
                     deletedElements.add(randomElem);
