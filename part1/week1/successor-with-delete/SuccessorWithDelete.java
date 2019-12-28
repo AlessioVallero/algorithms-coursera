@@ -18,7 +18,7 @@ public class SuccessorWithDelete {
     /**
      * Creates an n-sized array, with all successors initially set to the next element
      *
-     * @param n diameter of the n*n grid
+     * @param n size of the array
      */
     public SuccessorWithDelete(int n) {
         arData = new int[n];
