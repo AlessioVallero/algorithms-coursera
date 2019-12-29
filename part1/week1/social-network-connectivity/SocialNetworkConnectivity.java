@@ -60,7 +60,7 @@ public class SocialNetworkConnectivity {
     /**
      * Test client
      *
-     * @param args Proper Usage is: SocialNetworkConnectivity <ARRAY_SIZE> <TRIALS>
+     * @param args Proper Usage is: SocialNetworkConnectivity <ARRAY_SIZE> <DENSITY> <TRIALS>
      */
     public static void main(String[] args) {
         // Check how many arguments were passed in
