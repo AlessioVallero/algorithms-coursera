@@ -1,7 +1,3 @@
-package deque;
-
-import edu.princeton.cs.algs4.StdRandom;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -78,9 +74,9 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     /**
-     * Return the number of items on the deque
+     * Return the number of items in the deque
      *
-     * @return The number of items on the deque
+     * @return The number of items in the deque
      */
     public int size() {
         return size;
@@ -146,21 +142,33 @@ public class Deque<Item> implements Iterable<Item> {
      * @return The item removed from the front
      */
     public Item removeFirst() {
-        if (size == 0) throw new java.util.NoSuchElementException();
+        if (size == 0) throw new NoSuchElementException();
 
         DequeLinkedListNode oldHead = head;
         Item retItem = oldHead.value;
 
         // The new head is going to be the current second element
         // The prev element of the new head becomes nobody (null)
-        DequeLinkedListNode newHead = oldHead.next;
-        newHead.prev = null;
+        if (oldHead.next != null) {
+            DequeLinkedListNode newHead = oldHead.next;
+            newHead.prev = null;
 
-        // Delete old head's next pointer to avoid zombie references
-        oldHead.next = null;
-        head = newHead;
+            // Delete old head's next pointer to avoid zombie references
+            oldHead.next = null;
+
+            head = newHead;
+        }
+        else {
+            head = null;
+        }
 
         size--;
+
+        // Clear tail if head was the tail too
+        if (size == 0 && tail != null) {
+            tail.prev = null; // Loitering
+            tail = null;
+        }
 
         return retItem;
     }
@@ -171,21 +179,32 @@ public class Deque<Item> implements Iterable<Item> {
      * @return The item removed from the back
      */
     public Item removeLast() {
-        if (size == 0) throw new java.util.NoSuchElementException();
+        if (size == 0) throw new NoSuchElementException();
 
         DequeLinkedListNode oldTail = tail;
         Item retItem = oldTail.value;
 
         // The new tail is going to be the current tail's previous element
         // The next element of the new tail becomes nobody (null)
-        DequeLinkedListNode newTail = oldTail.prev;
-        newTail.next = null;
+        if (oldTail.prev != null) {
+            DequeLinkedListNode newTail = oldTail.prev;
+            newTail.next = null;
 
-        // Delete old tail's prev pointer to avoid zombie references
-        oldTail.prev = null;
-        tail = newTail;
+            // Delete old tail's prev pointer to avoid zombie references
+            oldTail.prev = null;
+            tail = newTail;
+        }
+        else {
+            tail = null;
+        }
 
         size--;
+
+        // Clear head if tail was the head too
+        if (size == 0 && head != null) {
+            head.next = null; // Loitering
+            head = null;
+        }
 
         return retItem;
     }
@@ -199,8 +218,11 @@ public class Deque<Item> implements Iterable<Item> {
         return new DequeIterator();
     }
 
+    /**
+     * Print the content of the Deque using an iterator
+     */
     private void printDeque() {
-        // Print deque using Iterator
+        // Print Deque using Iterator
         System.out.print("Current deque content: ");
         for (Object value : this) {
             System.out.print(value + " ");
@@ -211,37 +233,17 @@ public class Deque<Item> implements Iterable<Item> {
     /**
      * Unit testing (required)
      *
-     * @param args
+     * @param args No argument is necessary
      */
     public static void main(String[] args) {
-        Deque<Integer> deque = new Deque<>();
-
-        for (int i = 0; i < 10; i++) {
-            int newRandomItem = StdRandom.uniform(-100, 100);
-
-            // Add first
-            deque.addFirst(newRandomItem);
-            System.out.println("addFirst: " + newRandomItem);
-            // Add last
-            deque.addLast(-newRandomItem);
-            System.out.println("addLast: " + (-newRandomItem));
-            // Print size and isEmpty
-            System.out.println(
-                    "Deque size: " + deque.size() + " Deque isEmpty: " + deque.isEmpty());
-            // Print current status of Deque using the iterator
-            deque.printDeque();
-            // Remove first element in the Deque
-            System.out.println("removedFirst: " + deque.removeFirst());
-            // Print current status of Deque using the iterator
-            deque.printDeque();
-            // Add first
-            deque.addFirst(newRandomItem * 10);
-            System.out.println("addFirst: " + newRandomItem * 10);
-            // Remove last element in the Deque
-            System.out.println("removeLast: " + deque.removeLast());
-            // Print current status of deque using the iterator
-            deque.printDeque();
-            System.out.println();
-        }
+        Deque<Integer> deque = new Deque<Integer>();
+        deque.isEmpty();
+        deque.isEmpty();
+        deque.addFirst(3);
+        deque.addFirst(4);
+        deque.removeLast();
+        deque.removeLast();
+        deque.addFirst(7);
+        deque.removeLast();
     }
 }
