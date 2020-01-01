@@ -1,7 +1,13 @@
 class QueueWithTwoStacks:
-    """Create a queue using two stacks."""
+    """
+    Create a queue using two stacks.
+    """
 
     def __init__(self):
+        """
+        Init an empty pair of Stacks.
+        """
+
         self.__first_stack = []
         self.__second_stack = []
 
@@ -26,7 +32,7 @@ class QueueWithTwoStacks:
 
     def dequeue(self):
         """
-        Return the oldest element in queue (LIFO).
+        Return the oldest element in queue (FIFO).
         :return: Oldest element in queue
         """
 
