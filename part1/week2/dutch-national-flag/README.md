@@ -5,6 +5,6 @@ swap(i,j): swap the pebble in bucket i with the pebble in bucket j.
 color(i): determine the color of the pebble in bucket i.
 
 The performance requirements are as follows:
-- At most n calls to color()color().
-- At most n calls to swap()swap().
+- At most n calls to color().
+- At most n calls to swap().
 - Constant extra space.
