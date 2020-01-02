@@ -5,15 +5,15 @@ class Permutation:
 
     @staticmethod
     def equals(a, b):
-        a.sort()
-        b.sort()
-
         if len(a) != len(b):
             return False
 
+        sorted_a = sorted(a)
+        sorted_b = sorted(b)
+
         i = 0
-        while i < len(a):
-            if a[i] != b[i]:
+        while i < len(sorted_a):
+            if sorted_a[i] != sorted_b[i]:
                 return False
             i += 1
 
@@ -26,7 +26,7 @@ def unit_test():
     """
 
     first_ar = [5, 4, 1]
-    second_ar = [1, 6, 4]
+    second_ar = [1, 5, 4]
 
     print(Permutation.equals(first_ar, second_ar))
 

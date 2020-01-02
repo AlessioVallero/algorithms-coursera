@@ -21,12 +21,12 @@ class TwoSets:
         if len(a) < 1 or len(b) < 1:
             return 0
 
-        a.sort(key=cmp_to_key(TwoSets.compare))
-        b.sort(key=cmp_to_key(TwoSets.compare))
+        sorted_a = sorted(a, key=cmp_to_key(TwoSets.compare))
+        sorted_b = sorted(b, key=cmp_to_key(TwoSets.compare))
 
         i = j = count = 0
-        while i < len(a) and j < len(b):
-            compare_elements = TwoSets.compare(a[i], b[j])
+        while i < len(sorted_a) and j < len(sorted_b):
+            compare_elements = TwoSets.compare(sorted_a[i], sorted_b[j])
             if compare_elements == 0:
                 count += 1
                 i += 1
